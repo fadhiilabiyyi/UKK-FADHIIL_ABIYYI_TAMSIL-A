@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CommunityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,10 @@ Route::controller(AuthenticationController::class)->group(function () {
 // Only Community can access this route
 Route::middleware(['auth:community,officer', 'checkGuard:community'])->group(function () {
 
+});
+
+// Only Officer can access this route
+Route::middleware(['auth:community,officer', 'checkGuard:officer'])->group(function () {
+    Route::resource('/communities', CommunityController::class)->except('edit', 'show');
+    Route::get('/communities/{community:slug}/edit', [CommunityController::class, 'edit'])->name('communities.edit');
 });
