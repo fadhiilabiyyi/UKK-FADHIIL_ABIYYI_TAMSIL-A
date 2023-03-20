@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'community' => [
+            'driver' => 'session',
+            'provider' => 'communities',
+        ],
+        'officer' => [
+            'driver' => 'session',
+            'provider' => 'officers',
+        ],
     ],
 
     /*
@@ -63,6 +71,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'communities' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Community::class,
+        ],
+        'officers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Officer::class,
         ],
 
         // 'users' => [
