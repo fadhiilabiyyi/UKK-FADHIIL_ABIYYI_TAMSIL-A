@@ -88,4 +88,9 @@ class AuthenticationController extends Controller
        // Return login
         return redirect(route('login'));
     }
+
+    public function landing()
+    {
+        return view('community.index');
+    }
 }
