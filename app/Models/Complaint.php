@@ -9,6 +9,8 @@ class Complaint extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function community()
     {
         return $this->belongsTo(Community::class);
