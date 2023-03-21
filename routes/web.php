@@ -52,4 +52,6 @@ Route::middleware(['auth:community,officer', 'checkGuard:officer'])->group(funct
     Route::get('/officers/{officer:slug}/edit', [OfficerController::class, 'edit'])->name('officers.edit');
     Route::resource('/categories', CategoryController::class)->except('edit', 'show');
     Route::get('/categories/{category:slug}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::resource('/complaints', ComplaintController::class);
+    Route::put('/complaints/verification/{complaint:slug}', [ComplaintController::class, 'verification'])->name('complaints.verification');
 });

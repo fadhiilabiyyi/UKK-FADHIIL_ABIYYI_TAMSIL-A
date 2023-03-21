@@ -16,7 +16,8 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        //
+        $complaints = Complaint::all();
+        return view('admin.complaint.index', compact('complaints'));
     }
 
     /**
@@ -64,7 +65,16 @@ class ComplaintController extends Controller
      */
     public function destroy(Complaint $complaint)
     {
-        //
+        Complaint::destroy($complaint->id);
+        return redirect(route('complaints.index'))->with('success', 'Complaint data has been deleted');
+    }
+
+    public function verification(Complaint $complaint)
+    {
+        $complaint->update([
+            'status' => 'verified'
+        ]);
+        return redirect(route('complaints.index'))->with('success', 'Data has been verificated');
     }
 
     public function complaintForm()
