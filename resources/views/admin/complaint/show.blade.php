@@ -42,11 +42,11 @@
         <div class="container text-center">
             <p class="text-3xl my-6">Tanggapan</p>
             <p class="break-normal my-4 ">
-                Ditanggapi oleh : {{ $complaint->community->name }}
+                Ditanggapi oleh : {{ $complaint->response->officer->name }}
             </p>
         </div>
         <article class="mt-4">
-            {!! $complaint->complaint !!}
+            {!! $complaint->response->response !!}
         </article>
     </div>
 </main>

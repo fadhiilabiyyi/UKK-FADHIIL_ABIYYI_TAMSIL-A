@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\AuthenticationController;
@@ -55,4 +56,6 @@ Route::middleware(['auth:community,officer', 'checkGuard:officer'])->group(funct
     Route::resource('/complaints', ComplaintController::class);
     Route::get('complaints/{complaint:slug}', [ComplaintController::class, 'show'])->name('complaints.show');
     Route::put('/complaints/verification/{complaint:slug}', [ComplaintController::class, 'verification'])->name('complaints.verification');
+    Route::resource('/responses', ResponseController::class)->except('create');
+    Route::get('/responses/create/{complaint:slug}/', [ResponseController::class, 'create'])->name('responses.create');
 });
