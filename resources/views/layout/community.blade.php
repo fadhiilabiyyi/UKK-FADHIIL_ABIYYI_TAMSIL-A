@@ -39,7 +39,7 @@
                 <nav
                     class="flex flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
                     <a href="{{ route('home') }}" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900 @if (request()->routeIs('home')) text-gray-900 font-black @endif">Home</a>
-                    <a href="" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900 @if (request()->routeIs('')) text-gray-900 @endif">Pengaduan Saya</a>
+                    <a href="{{ route('complaint.show', Auth::guard('community')->user()->slug) }}" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900 @if (request()->routeIs('complaint.*')) text-gray-900 @endif">Pengaduan Saya</a>
                     <div class="lg:hidden">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

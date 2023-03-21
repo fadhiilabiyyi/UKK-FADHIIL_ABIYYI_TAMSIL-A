@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthenticationController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommunityController;
-use App\Http\Controllers\OfficerController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,10 @@ Route::controller(AuthenticationController::class)->group(function () {
 
 // Only Community can access this route
 Route::middleware(['auth:community,officer', 'checkGuard:community'])->group(function () {
-
+    Route::get('/complaint', [ComplaintController::class, 'complaintForm'])->name('complaint');
+    Route::post('/complaint', [ComplaintController::class, 'complaintStore'])->name('complaint.store');
+    Route::get('/complaint/{community:slug}', [ComplaintController::class, 'showAllComplaint'])->name('complaint.show');
+    Route::get('/complaint/detail/{complaint:slug}', [ComplaintController::class, 'detailComplaint'])->name('complaint.detail');
 });
 
 // Only Officer can access this route
