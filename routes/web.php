@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\OfficerController;
 use Illuminate\Support\Facades\Route;
@@ -45,4 +46,6 @@ Route::middleware(['auth:community,officer', 'checkGuard:officer'])->group(funct
     Route::get('/communities/{community:slug}/edit', [CommunityController::class, 'edit'])->name('communities.edit');
     Route::resource('/officers', OfficerController::class)->except('edit', 'show');
     Route::get('/officers/{officer:slug}/edit', [OfficerController::class, 'edit'])->name('officers.edit');
+    Route::resource('/categories', CategoryController::class)->except('edit', 'show');
+    Route::get('/categories/{category:slug}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
 });
