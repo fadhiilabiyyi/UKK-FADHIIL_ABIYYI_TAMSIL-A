@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\OfficerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,4 +43,6 @@ Route::middleware(['auth:community,officer', 'checkGuard:community'])->group(fun
 Route::middleware(['auth:community,officer', 'checkGuard:officer'])->group(function () {
     Route::resource('/communities', CommunityController::class)->except('edit', 'show');
     Route::get('/communities/{community:slug}/edit', [CommunityController::class, 'edit'])->name('communities.edit');
+    Route::resource('/officers', OfficerController::class)->except('edit', 'show');
+    Route::get('/officers/{officer:slug}/edit', [OfficerController::class, 'edit'])->name('officers.edit');
 });
