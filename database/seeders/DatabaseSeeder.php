@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Officer;
+use App\Models\Category;
 use App\Models\Community;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -55,6 +56,57 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'telp' => '+62 895 7864 8522',
             'level' => 'admin'
+        ]);
+
+        // Category Seeder
+        Category::create([
+            'name' => 'Agama',
+            'slug' => 'agama'
+        ]);
+
+        Category::create([
+            'name' => 'Ekonomi dan Keuangan',
+            'slug' => 'ekonomi-dan-keuangan'
+        ]);
+
+        Category::create([
+            'name' => 'Kesehatan',
+            'slug' => 'kesehatan'
+        ]);
+
+        Category::create([
+            'name' => 'Lingkungan Hidup dan Kehutanan',
+            'slug' => 'lingkungan-hidup-dan-kehutanan'
+        ]);
+
+        Category::create([
+            'name' => 'Pendidikan dan Kebudayaan',
+            'slug' => 'pendidikan-dan-kebudayaan'
+        ]);
+
+        Category::create([
+            'name' => 'Pertanian dan Perternakan',
+            'slug' => 'pertanian-dan-peternakan'
+        ]);
+
+        Category::create([
+            'name' => 'Politik dan Hukum',
+            'slug' => 'politik-dan-hukum'
+        ]);
+
+        Category::create([
+            'name' => 'Sosial dan Kesejahteraan',
+            'slug' => 'sosial-dan-kesejahteraan'
+        ]);
+
+        Category::create([
+            'name' => 'Kependudukan',
+            'slug' => 'kependudukan'
+        ]);
+
+        Category::create([
+            'name' => 'Perlindungan Konsumen',
+            'slug' => 'perlindungan-konsumen'
         ]);
     }
 }
