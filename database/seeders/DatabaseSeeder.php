@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Officer;
 use App\Models\Category;
 use App\Models\Community;
+use App\Models\Complaint;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -107,6 +108,45 @@ class DatabaseSeeder extends Seeder
         Category::create([
             'name' => 'Perlindungan Konsumen',
             'slug' => 'perlindungan-konsumen'
+        ]);
+
+        Complaint::create([
+            'title' => 'Kucing Hilang ey',
+            'slug' => 'kucing-hilang-ey',
+            'category_id' => 1,
+            'community_id' => 1,
+            'date' => '2023-03-21',
+            'complaint' => 'Kucing hilang',
+            'image' => 'fafa',
+            'status' => 'new',
+            'created_at' => '2023-03-20 07:28:00',
+            'updated_at' => '2023-03-20 07:28:00'
+        ]);
+
+        Complaint::create([
+            'title' => 'Kucing Hilang ey',
+            'slug' => 'kucing-hilang-ey-1',
+            'category_id' => 1,
+            'community_id' => 1,
+            'date' => '2023-03-21',
+            'complaint' => 'Kucing hilang',
+            'image' => 'fafa',
+            'status' => 'new',
+            'created_at' => '2023-03-19 07:28:00',
+            'updated_at' => '2023-03-19 07:28:00'
+        ]);
+
+        Complaint::create([
+            'title' => 'Kucing Hilang ey',
+            'slug' => 'kucing-hilang-ey-2',
+            'category_id' => 1,
+            'community_id' => 1,
+            'date' => '2023-03-21',
+            'complaint' => 'Kucing hilang',
+            'image' => 'fafa',
+            'status' => 'new',
+            'created_at' => '2023-03-18 07:28:00',
+            'updated_at' => '2023-03-18 07:28:00'
         ]);
     }
 }
