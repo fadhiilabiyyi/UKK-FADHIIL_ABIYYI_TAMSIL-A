@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('responses', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
             $table->foreignId('complaint_id')->constarined('complaints');
             $table->foreignId('officer_id')->constrained('officers');
             $table->longText('response');
