@@ -17,7 +17,7 @@
           </div>
           <div>
             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Jumlah Masyarakat</p>
-            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200"></p>
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $communities->count() }}</p>
           </div>
         </div>
         <!-- Card -->
@@ -63,7 +63,7 @@
           </div>
           <div>
             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Jumlah Petugas dan Admin</p>
-            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200"></p>
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $officers->count() }}</p>
           </div>
         </div>
       </div>
