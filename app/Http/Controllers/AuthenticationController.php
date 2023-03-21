@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Officer;
 use App\Models\Community;
+use App\Models\Complaint;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +26,7 @@ class AuthenticationController extends Controller
 
         if (Auth::guard('community')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect(route('home'));
+            return redirect(route('home'))->with('success-login', 'Berhasil Login');
         }
 
         if (Auth::guard('officer')->attempt($credentials)) {
@@ -67,7 +69,9 @@ class AuthenticationController extends Controller
         if (Auth::guard('community')->check()) {
             return view('community.index');
         } elseif(Auth::guard('officer')->user()->level == 'admin') {
-            return view('admin.index');
+            $communities = Community::all();
+            $officers = Officer::all();
+            return view('admin.index', compact('communities', 'officers'));
         } else {
             return view('officer.index');
         }

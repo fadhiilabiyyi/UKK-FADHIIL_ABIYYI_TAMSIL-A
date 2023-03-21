@@ -39,15 +39,20 @@
             {!! $complaint->complaint !!}
         </article>
 
+        @if ($complaint->response != null)
+            <div class="container text-center">
+                <p class="text-3xl my-6">Tanggapan</p>
+                <p class="break-normal my-4 ">
+                    Ditanggapi oleh : {{ $complaint->response->officer->name }}
+                </p>
+            </div>
+            <article class="mt-4">
+                {!! $complaint->response->response !!}
+            </article>
+        @endif
         <div class="container text-center">
-            <p class="text-3xl my-6">Tanggapan</p>
-            <p class="break-normal my-4 ">
-                Ditanggapi oleh : {{ $complaint->response->officer->name }}
-            </p>
+            <p class="text-3xl my-6">Belum ditanggapi</p>
         </div>
-        <article class="mt-4">
-            {!! $complaint->response->response !!}
-        </article>
     </div>
 </main>
 
