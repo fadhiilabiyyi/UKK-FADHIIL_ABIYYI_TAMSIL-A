@@ -7,6 +7,7 @@ use App\Models\Community;
 use App\Models\Complaint;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ComplaintController extends Controller
@@ -14,9 +15,18 @@ class ComplaintController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $complaints = Complaint::all();
+        if ($request->filter) {
+            $complaints = Complaint::where('status', $request->filter)->get();
+        }
+        if ($request->date1 || $request->date2) {
+            $date1 = Carbon::parse(request()->date1)->toDateTimeString();
+            $date2 = Carbon::parse(request()->date2)->toDateTimeString();
+            $complaints = Complaint::whereDate('created_at', '>=', $date1)->WhereDate('created_at', '<=', $date2)->get();
+            // $complaints = Complaint::whereBetween('created_at', [$date1, $date2])->orWhere('created_at', [$date1, $date2])->get();
+        }
         return view('admin.complaint.index', compact('complaints'));
     }
 
@@ -94,6 +104,7 @@ class ComplaintController extends Controller
         ];
         $validatedData = $request->validate($rules);
         $validatedData['slug'] = Str::slug($validatedData['title'], '-');
+        $validatedData['slug'] = $validatedData['slug'] . Str::random(16);
         $validatedData['community_id'] = Auth::guard('community')->user()->id;
         $validatedData['status'] = 'new';
         $validatedData['image'] = $request->file('image')->store('public/images');

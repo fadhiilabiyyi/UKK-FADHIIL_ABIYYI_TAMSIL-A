@@ -28,6 +28,21 @@
                     </div>
                 @endif
 
+                <form action="">
+                    <select name="filter" id="">
+                        <option value="new" @if(request()->filter == 'new') selected @endif>Belum diverifikasi</option>
+                        <option value="verified" @if(request()->filter == 'verified') selected @endif>Sudah diverifikasi</option>
+                        <option value="finished" @if(request()->filter == 'finished') selected @endif>Sudah ditanggapi</option>
+                    </select>
+                    <button>filter</button>
+                </form>
+
+                <form action="">
+                    <input type="date" name="date1" id="" value="{{ request()->date1 }}">
+                    <input type="date" name="date2" id="" value="{{ request()->date2 }}">
+                    <button>filter</button>
+                </form>
+
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
@@ -77,10 +92,10 @@
                                 {{ $complaint->community->name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $complaint->created_at->diffForHumans() }}
+                                {{ $complaint->created_at }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $complaint->updated_at->diffForHumans() }}
+                                {{ $complaint->updated_at }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <div class="flex items-center space-x-4 text-sm">
