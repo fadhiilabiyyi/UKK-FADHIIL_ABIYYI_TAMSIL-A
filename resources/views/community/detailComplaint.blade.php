@@ -49,10 +49,11 @@
             <article class="mt-4">
                 {!! $complaint->response->response !!}
             </article>
+        @else
+            <div class="container text-center">
+                <p class="text-3xl my-6">Belum ditanggapi</p>
+            </div>
         @endif
-        <div class="container text-center">
-            <p class="text-3xl my-6">Belum ditanggapi</p>
-        </div>
     </div>
 </main>
 
