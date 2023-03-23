@@ -58,4 +58,5 @@ Route::middleware(['auth:community,officer', 'checkGuard:officer'])->group(funct
     Route::put('/complaints/verification/{complaint:slug}', [ComplaintController::class, 'verification'])->name('complaints.verification');
     Route::resource('/responses', ResponseController::class)->except('create');
     Route::get('/responses/create/{complaint:slug}/', [ResponseController::class, 'create'])->name('responses.create');
+    Route::post('/print', [ComplaintController::class, 'print'])->name('print');
 });

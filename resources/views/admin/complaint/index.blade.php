@@ -43,6 +43,14 @@
                     <button>filter</button>
                 </form>
 
+                <form action="{{ route('print') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="filter"value="@if(request()->filter == 'new') new @endif @if(request()->filter == 'verified') verified @endif @if(request()->filter == 'finished') finished @endif">
+                    <input type="hidden" name="date1" value="@if(request()->date1) {{ request()->date1 }} @endif">
+                    <input type="hidden" name="date2" value="@if(request()->date2) {{ request()->date2 }} @endif">
+                    <button>print</button>
+                </form>
+
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">

@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class ComplaintController extends Controller
 {
@@ -128,5 +129,23 @@ class ComplaintController extends Controller
             return abort(403);
         }
         return view('community.detailComplaint', compact('complaint'));
+    }
+
+    public function print(Request $request)
+    {
+        $complaints = Complaint::all();
+        if ($request->filter) {
+            $complaints = Complaint::where('status', $request->filter)->get();
+        }
+        if ($request->date1 || $request->date2) {
+            $date1 = Carbon::parse(request()->date1)->toDateTimeString();
+            $date2 = Carbon::parse(request()->date2)->toDateTimeString();
+            $complaints = Complaint::whereDate('created_at', '>=', $date1)->WhereDate('created_at', '<=', $date2)->get();
+            // $complaints = Complaint::whereBetween('created_at', [$date1, $date2])->orWhere('created_at', [$date1, $date2])->get();
+        }
+
+        $pdf = PDF::loadView('admin.complaint.print', compact('complaints'));
+
+        return $pdf->download('struk.pdf');
     }
 }
