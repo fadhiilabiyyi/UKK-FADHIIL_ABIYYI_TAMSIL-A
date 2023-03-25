@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
+use App\Helper\Helper;
 use App\Models\Officer;
+use App\Models\Response;
 use App\Models\Community;
 use App\Models\Complaint;
 use Illuminate\Support\Str;
@@ -26,11 +29,13 @@ class AuthenticationController extends Controller
 
         if (Auth::guard('community')->attempt($credentials)) {
             $request->session()->regenerate();
+            Helper::logging('User login');
             return redirect(route('home'))->with('success-login', 'Berhasil Login');
         }
 
         if (Auth::guard('officer')->attempt($credentials)) {
             $request->session()->regenerate();
+            Helper::logging('User login');
             return redirect(route('home'));
         }
 
@@ -60,7 +65,7 @@ class AuthenticationController extends Controller
 
         // Save to database
         Community::create($validatedData);
-
+        Helper::logging('New user register');
         return redirect(route('login'))->with('success', 'New User has been added!');
     }
 
@@ -71,7 +76,10 @@ class AuthenticationController extends Controller
         } elseif(Auth::guard('officer')->user()->level == 'admin') {
             $communities = Community::all();
             $officers = Officer::all();
-            return view('admin.index', compact('communities', 'officers'));
+            $complaints = Complaint::all();
+            $responses = Response::all();
+            $logs = Log::orderBy('created_at', 'desc')->get();
+            return view('admin.index', compact('communities', 'officers', 'logs', 'complaints', 'responses'));
         } else {
             return view('officer.index');
         }

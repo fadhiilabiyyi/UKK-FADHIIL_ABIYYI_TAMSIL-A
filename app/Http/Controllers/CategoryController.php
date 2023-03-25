@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -42,6 +44,7 @@ class CategoryController extends Controller
         $validatedData = $request->validate($rules);
         $validatedData['slug'] = Str::slug($validatedData['name'], '-');
         Category::create($validatedData);
+        Helper::logging("Create new Category by name : " . $validatedData['name']);
         return redirect(route('categories.index'))->with('success', 'New Category has been added');
     }
 
@@ -75,6 +78,7 @@ class CategoryController extends Controller
         $validatedData = $request->validate($rules);
         $validatedData['slug'] = Str::slug($validatedData['name'], '-');
         Category::where('id', $category->id)->update($validatedData);
+        Helper::logging("Update category name from $category->name to " . $validatedData['name']);
         return redirect(route('categories.index'))->with('success', 'Category has been updated');
     }
 
@@ -84,6 +88,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         Category::destroy($category->id);
+        Helper::logging("Category deleted");
         return redirect(route('categories.index'))->with('success', 'Category has been delete');
     }
 }

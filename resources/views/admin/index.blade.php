@@ -33,7 +33,7 @@
           </div>
           <div>
             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Jumlah Pengaduan</p>
-            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200"></p>
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $complaints->count() }}</p>
           </div>
         </div>
         <!-- Card -->
@@ -47,7 +47,7 @@
           </div>
           <div>
             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Jumlah Tanggapan</p>
-            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200"></p>
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $responses->count() }}</p>
           </div>
         </div>
         <!-- Card -->
@@ -66,7 +66,40 @@
             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $officers->count() }}</p>
           </div>
         </div>
-      </div>
+    </div>
+
+    <div class="w-full overflow-hidden rounded-lg shadow-xs mb-4">
+        <div class="w-full overflow-x-auto">
+            <table class="w-full whitespace-no-wrap">
+                <thead>
+                    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                        <th class="px-4 py-3">History</th>
+                        <th class="px-4 py-3">Username</th>
+                        <th class="px-4 py-3">Role</th>
+                        <th class="px-4 py-3">Created at</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                    @foreach ($logs as $log)
+                    <tr class="text-gray-700 dark:text-gray-400">
+                        <td class="px-4 py-3 text-sm">
+                            {{ $log->history }}
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            {{ $log->username }}
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            {{ $log->role }}
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            {{ $log->updated_at->diffForHumans() }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
     </div>
   </main>
 @endsection

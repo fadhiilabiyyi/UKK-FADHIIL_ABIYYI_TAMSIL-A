@@ -19,6 +19,30 @@
 <main class="h-full pb-16 overflow-y-auto">
     <div class="container grid px-6 mx-auto">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Data Pengaduan Masyarakat Desa Ciburuy</h2>
+
+        <form action="" class="mb-2">
+            <select class="shadow appearance-none border rounded w-1/2 md:w-1/4 py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" name="filter" id="">
+                <option value="new" @if(request()->filter == 'new') selected @endif>Belum diverifikasi</option>
+                <option value="verified" @if(request()->filter == 'verified') selected @endif>Sudah diverifikasi</option>
+                <option value="finished" @if(request()->filter == 'finished') selected @endif>Sudah ditanggapi</option>
+            </select>
+            <button class="bg-black border rounded text-white font-bold text-sm hover:bg-gray-700 p-2">Filter</button>
+        </form>
+
+        <form action="" class="mb-2">
+            <input class="shadow appearance-none border rounded w-1/2 md:w-1/4 lg:w-1/4 py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" type="date" name="date1" id="" value="{{ request()->date1 }}">
+            <input class="shadow appearance-none border rounded w-1/2 md:w-1/4 lg:w-1/4 py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" type="date" name="date2" id="" value="{{ request()->date2 }}">
+            <button class="bg-black border rounded text-white font-bold text-sm hover:bg-gray-700 p-2">Filter</button>
+        </form>
+
+        <form action="{{ route('print') }}" method="post" class="mb-2">
+            @csrf
+            <input type="hidden" name="filter"value="@if(request()->filter == 'new') new @endif @if(request()->filter == 'verified') verified @endif @if(request()->filter == 'finished') finished @endif">
+            <input type="hidden" name="date1" value="@if(request()->date1) {{ request()->date1 }} @endif">
+            <input type="hidden" name="date2" value="@if(request()->date2) {{ request()->date2 }} @endif">
+            <button class="bg-black border rounded text-white font-bold text-sm hover:bg-gray-700 p-2">Print</button>
+        </form>
+
         <div class="w-full overflow-hidden rounded-lg shadow-xs mb-4">
             <div class="w-full overflow-x-auto">
 
@@ -27,29 +51,6 @@
                         <span class="font-medium">{{ session('success') }}</span>
                     </div>
                 @endif
-
-                <form action="">
-                    <select name="filter" id="">
-                        <option value="new" @if(request()->filter == 'new') selected @endif>Belum diverifikasi</option>
-                        <option value="verified" @if(request()->filter == 'verified') selected @endif>Sudah diverifikasi</option>
-                        <option value="finished" @if(request()->filter == 'finished') selected @endif>Sudah ditanggapi</option>
-                    </select>
-                    <button>filter</button>
-                </form>
-
-                <form action="">
-                    <input type="date" name="date1" id="" value="{{ request()->date1 }}">
-                    <input type="date" name="date2" id="" value="{{ request()->date2 }}">
-                    <button>filter</button>
-                </form>
-
-                <form action="{{ route('print') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="filter"value="@if(request()->filter == 'new') new @endif @if(request()->filter == 'verified') verified @endif @if(request()->filter == 'finished') finished @endif">
-                    <input type="hidden" name="date1" value="@if(request()->date1) {{ request()->date1 }} @endif">
-                    <input type="hidden" name="date2" value="@if(request()->date2) {{ request()->date2 }} @endif">
-                    <button>print</button>
-                </form>
 
                 <table class="w-full whitespace-no-wrap">
                     <thead>
